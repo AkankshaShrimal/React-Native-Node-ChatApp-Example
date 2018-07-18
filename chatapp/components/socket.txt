@@ -1,0 +1,52 @@
+import React from 'react';
+import { StyleSheet, AppRegistry, View, Text, Button } from 'react-native';
+import Route from './components/routing.js';
+
+const io = require('socket.io-client/dist/socket.io.js');
+const connectionConfig = {
+  jsonp: false,
+ 
+  transports: ['websocket'], // you need to explicitly tell it to use websockets
+};
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+
+  }
+
+  componentWillMount() {
+    console.log(io);
+
+    const socket = io.connect('http://192.168.1.8:3000',connectionConfig);
+   
+    
+    socket.emit("message","helloji");
+    socket.on("reply",(msg)=>{
+      console.warn(msg);
+    })
+  }
+
+
+  render() {
+    return (
+      <View >
+        <Text>click</Text>
+        <Button
+          onPress={() => {
+
+            console.log("h");
+          }}
+          title="Learn More"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+        />
+      </View>
+
+    );
+  }
+}
+
+export default App;
+AppRegistry.registerComponent('chatapp', () => App);
