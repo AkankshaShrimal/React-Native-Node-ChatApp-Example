@@ -1,5 +1,6 @@
 # React-Native-Node-ChatApp
-A chatapp using socket.io and react-native.
+A dummy chatapp using socket.io and react-native.
+A demo for implementing a mobile chatroom as well as practice for myself using React Native and Socket.io. 
 
 ## Project Screenshots
 <p align="center">
@@ -11,3 +12,29 @@ A chatapp using socket.io and react-native.
 
 <p align="center">
 </p>
+
+## Procedure:
+
+- Clone this repository `git clone git@github.com:AkankshaShrimal/React-Native-Node-ChatApp.git`.
+
+## Running React Native application:
+
+-Install the `Expo` client app on your iOS or Android phone.
+
+-Connect to server using nodemon.
+  To do follow the below instructions:
+    ```bash
+        $ nodemon index
+    ```
+-Run the react-native(chatapp) application using following command.
+    ```bash
+        $ npm start
+    ```
+-Use `Expo` app to visualise the react-app and server to respond.
+
+## Vote of Thanks
+
+- Thanks to [Farid Safi](https://github.com/FaridSafi) for developing chat template.
+
+- Thanks to [Vincent Le](https://github.com/vinnyoodles/react-native-socket-io-example) for code reference.
+ 
