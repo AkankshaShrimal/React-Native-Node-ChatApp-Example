@@ -14,6 +14,13 @@ class ChatTemplate extends React.Component {
         this.renderBubble = this.renderBubble.bind(this);
         this.onSend = this.onSend.bind(this);
         this.onReceive = this.onReceive.bind(this);
+
+        this.socket = io.connect('http://192.168.1.8:3000', { jsonp: false, transports: ['websocket'] });
+        this.socket.on("reply",
+
+            this.onReceive
+        );
+
     }
 
 
@@ -33,10 +40,7 @@ class ChatTemplate extends React.Component {
             ],
         });
 
-        const socket = io.connect('http://192.168.1.8:3000', {jsonp: false, transports: ['websocket'] });
-        socket.on("reply", (msg) => {
-            console.warn(msg);
-        })
+
     }
 
 
@@ -66,42 +70,23 @@ class ChatTemplate extends React.Component {
             messages: GiftedChat.append(previousState.messages, messages),
         }))
 
-        // for demo purpose
-        this.answerDemo(messages);
+        this.socket.emit("message", messages[0].text);
+
     }
 
-    answerDemo(messages) {
-        if (messages.length > 0) {
-            if ((messages[0].image || messages[0].location) || !this._isAlright) {
-                this.setState((previousState) => {
-                    return {
-                        typingText: 'React Native is typing'
-                    };
-                });
-            }
-        }
-    }
 
-    onReceive(text) {
-        this.setState((previousState) => {
-            return {
-                messages: GiftedChat.append(previousState.messages, {
-                    _id: Math.round(Math.random() * 1000000),
-                    text: text,
-                    createdAt: new Date(),
-                    user: {
-                        _id: 2,
-                        name: 'React Native',
-                        // avatar: 'https://facebook.github.io/react/img/logo_og.png',
-                    },
-                }),
-            };
-        });
+
+    onReceive(messages) {
+        console.log(messages);
+        this.setState(previousState => ({
+            messages: GiftedChat.append(previousState.messages, messages),
+        }));
+
     }
 
     render() {
         return (
-            <View style={{ backgroundColor: "#BAF9FD" ,flex: 1 }}>
+            <View style={{ backgroundColor: "#BAF9FD", flex: 1 }}>
                 <GiftedChat
                     style={{ backgroundColor: 'green' }}
                     messages={this.state.messages}
