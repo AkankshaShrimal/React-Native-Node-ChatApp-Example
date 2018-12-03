@@ -22,14 +22,18 @@ A demo for implementing a mobile chatroom as well as practice for myself using R
 -Install the `Expo` client app on your iOS or Android phone.
 
 -Connect to server using nodemon.
+
   To do follow the below instructions:
+
     ```bash
         $ nodemon index
     ```
 -Run the react-native(chatapp) application using following command.
+
     ```bash
         $ npm start
     ```
+    
 -Use `Expo` app to visualise the react-app and server to respond.
 
 ## Vote of Thanks
